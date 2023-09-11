@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { PRIVATE_KEY } from "./constants";
+import { PRIVATE_KEY } from "../constants";
 
 type Props = {
   id: string;

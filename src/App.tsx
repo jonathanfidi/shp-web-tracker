@@ -1,16 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import OrderInfo from "./OrderInfo";
-import Tracker from "./Tracker";
+import Tracker from "./pages/tracker";
+import Order from "./pages/order";
+import Index from "./pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <OrderInfo id="UK1876YH08_2" />,
+    element: <Index />,
   },
   {
-    path: "/order",
-    element: <OrderInfo id="UK1876YH08_2" />,
+    path: "/order/:id",
+    element: <Order />,
   },
   {
     path: "/tracker/:trackingNumber",

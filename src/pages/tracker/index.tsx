@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { PRIVATE_KEY } from "./constants";
+import { PRIVATE_KEY } from "../../constants";
 import { useQuery } from "react-query";
 import axios from "axios";
 
@@ -10,7 +10,7 @@ const Tracker = () => {
     `tracker-${trackingNumber}`,
     () => {
       return axios.get(
-        `https://api.shipup.co/v2/trackers?tracking_number=${trackingNumber}&expand[]=notifications`,
+        `https://api.shipup.co/v2/trackers?tracking_number=${trackingNumber}&expand[]=notifications&expand[]=fulfillment.order`,
         {
           headers: {
             Authorization: `${PRIVATE_KEY}`,
@@ -32,7 +32,9 @@ const Tracker = () => {
   return (
     tracker && (
       <>
-        <Link to="/order">{"<"} Back to the order</Link>
+        <Link to={`/order/${tracker.fulfillment.order.order_number}`}>
+          {"<"} Back to the order
+        </Link>
         <h1>Tracker #{tracker?.tracking_number}</h1>
         <h2>Notifications</h2>
         <ul>
