@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-
-const PRIVATE_KEY = "lnWvjqugGwUay3jKE8j31w";
+import { Link } from "react-router-dom";
+import { PRIVATE_KEY } from "./constants";
 
 type Props = {
   id: string;
@@ -22,8 +22,6 @@ const OrderInfo = ({ id }: Props) => {
 
   const order = data?.data?.data?.[0];
 
-  console.log("order", order);
-
   if (isFetching) return <h1>Loading...</h1>;
   if (isError) return <h1>Error</h1>;
 
@@ -40,8 +38,10 @@ const OrderInfo = ({ id }: Props) => {
             {order.fulfillments?.data?.map((fulfillment: any) => {
               return fulfillment.trackers?.data?.map((tracker: any) => (
                 <li key={tracker.id}>
-                  Tracker #{tracker.id}: {tracker.delivery_status_code} (
-                  {tracker.carrier.code})
+                  <Link to={`/tracker/${tracker.tracking_number}`}>
+                    Tracker #{tracker.tracking_number}:{" "}
+                    {tracker.delivery_status_code} ({tracker.carrier.code})
+                  </Link>
                 </li>
               ));
             })}
