@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import OrderInfo from "../components/OrderInfo";
 
 const Index = () => {
   return (
